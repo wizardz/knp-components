@@ -247,12 +247,6 @@ abstract class BaseTestCaseORM extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue(new DefaultNamingStrategy()))
         ;
 
-        $config
-            ->expects($this->any())
-            ->method('getCustomHydrationMode')
-            ->will($this->returnValue('Knp\Component\Pager\Event\Subscriber\Paginate\Doctrine\ORM\Query\AsIsHydrator'))
-        ;
-
         return $config;
     }
 }

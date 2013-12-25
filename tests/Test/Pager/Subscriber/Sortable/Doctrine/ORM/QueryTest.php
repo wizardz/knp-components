@@ -163,26 +163,6 @@ ___SQL;
         $this->assertEquals('SELECT DISTINCT a0_.id AS id0, a0_.title AS title1 FROM Article a0_ ORDER BY a0_.title ASC LIMIT 10 OFFSET 0', $executed[1]);
     }
 
-    /**
-     * @test
-     */
-    function shouldNotExecuteExtraQueriesWhenCountIsZero()
-    {
-        $_GET['sort'] = 'a.title';
-        $_GET['direction'] = 'asc';
-        $query = $this
-            ->getMockSqliteEntityManager()
-            ->createQuery('SELECT a FROM Test\Fixture\Entity\Article a')
-        ;
-
-        $p = new Paginator;
-        $this->startQueryLog();
-        $view = $p->paginate($query, 1, 10);
-        $this->assertTrue($view instanceof SlidingPagination);
-
-        $this->assertEquals(1, $this->queryAnalyzer->getNumExecutedQueries());
-    }
-
     protected function getUsedEntityFixtures()
     {
         return array('Test\Fixture\Entity\Article');
